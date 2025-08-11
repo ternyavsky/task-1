@@ -89,9 +89,11 @@ export const TextImageBlock = ({
       lastLineWidth >
       (containerWidth || 0) - indicatorWidth - safeZone - 60
     ) {
-      setIndicatorOffset(1); // сместить индикатор вниз
-      setExtraHeight(20);
-      setLineCount(lineCount + 1);
+      if (lineCount > 1) {
+        setIndicatorOffset(1); // сместить индикатор вниз
+        setExtraHeight(20);
+        setLineCount(lineCount + 1);
+      }
     } else {
       setIndicatorOffset(0);
       setExtraHeight(0);
@@ -137,8 +139,8 @@ export const TextImageBlock = ({
       className="max-w-[345px] w-full font-urbanist rounded-[25px] bg-white px-4 relative flex gap-2"
       id="block2"
       style={{
-        paddingTop: `${lineCount > 1 ? 16 : 24}px`,
-        paddingBottom: `${(lineCount > 1 ? 16 : 24) + extraHeight}px`,
+        paddingTop: `${lineCount < 3 && 16}px`,
+        paddingBottom: `${extraHeight + 16}px`,
         boxSizing: "border-box",
         whiteSpace: "normal",
         wordBreak: "break-word",
