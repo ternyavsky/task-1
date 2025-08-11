@@ -1,7 +1,8 @@
 import dotsSvg from "./assets/dots.svg";
 import { useEffect, useState } from "react";
+import image from "./assets/image.svg";
 
-export const TextBlock = ({
+export const TextImageBlock = ({
   text,
   indicatorValue,
   showPlus,
@@ -10,7 +11,7 @@ export const TextBlock = ({
   indicatorValue: number;
   showPlus: boolean;
 }) => {
-  const container = document.getElementById("block");
+  const container = document.getElementById("block2");
   const element = container?.querySelector("p");
   const [lineCount, setLineCount] = useState(1);
   const [extraHeight, setExtraHeight] = useState(0);
@@ -79,8 +80,15 @@ export const TextBlock = ({
     lastLineWidth = range.getBoundingClientRect().width;
 
     range.detach?.();
+    console.log(lastLineWidth, "lastLineWidth");
+    console.log(containerWidth, "containerWidth");
+    console.log(indicatorWidth, "indicatorWidth");
+    console.log(safeZone, "safezone");
 
-    if (lastLineWidth > (containerWidth || 0) - indicatorWidth - safeZone) {
+    if (
+      lastLineWidth >
+      (containerWidth || 0) - indicatorWidth - safeZone - 60
+    ) {
       setIndicatorOffset(1); // сместить индикатор вниз
       setExtraHeight(20);
       setLineCount(lineCount + 1);
@@ -126,8 +134,8 @@ export const TextBlock = ({
 
   return (
     <div
-      className="max-w-[345px] w-full font-urbanist rounded-[25px] bg-white px-4 relative"
-      id="block"
+      className="max-w-[345px] w-full font-urbanist rounded-[25px] bg-white px-4 relative flex gap-2"
+      id="block2"
       style={{
         paddingTop: `${lineCount > 1 ? 16 : 24}px`,
         paddingBottom: `${(lineCount > 1 ? 16 : 24) + extraHeight}px`,
@@ -136,10 +144,12 @@ export const TextBlock = ({
         wordBreak: "break-word",
         border: "1px solid #E5E7EB",
         boxShadow: "0px 1px 8px 0px rgba(0, 0, 0, 0.1)",
+        alignItems: lineCount > 2 ? "start" : "center",
       }}
     >
+      <img src={image} alt="" />
       <p className="text-[14px] leading-[140%] m-0 break-words font-normal text-[#3B4552] w-fit">
-        {text || "Drinking water lorem30"}
+        {text || "Drinking water"}
       </p>
 
       {/* Три точки справа сверху */}

@@ -1,4 +1,5 @@
 import { TextBlock } from "./TextBlock";
+import { TextImageBlock } from "./TextImageBlock";
 import { useState } from "react";
 
 function App() {
@@ -9,7 +10,7 @@ function App() {
   return (
     <div className="min-h-screen bg-[#FCFCFC] p-6">
       {/* Панель управления для тестирования */}
-      <div className="fixed top-4 right-4 bg-white rounded-lg shadow-lg p-6 border border-gray-200 z-50 min-w-[300px]">
+      <div className="fixed top-4 right-4 bg-white rounded-lg shadow-lg p-6 border border-gray-200 z-50 max-w-[200px] w-full">
         <h2 className="text-lg font-semibold text-gray-800 mb-4">
           Панель тестирования
         </h2>
@@ -128,21 +129,31 @@ function App() {
             Обычный индикатор (1000)
           </button>
         </div>
-
-     
       </div>
 
       {/* Основной контент */}
       <div className="pt-24">
-
-        <div className="flex flex-col gap-6 max-w-4xl mx-auto">
+        <div className="flex flex-row gap-10 mx-auto">
           {/* Блоки только с текстом */}
-          <div className="space-y-4">
+          <div className="space-y-4 w-full">
             <h2 className="text-xl font-semibold text-gray-700">
               Блоки "только текст"
             </h2>
             {Array.from({ length: 3 }).map((_, index) => (
               <TextBlock
+                key={index}
+                text={text}
+                indicatorValue={indicatorValue}
+                showPlus={showPlus}
+              />
+            ))}
+          </div>
+          <div className="space-y-4 w-full">
+            <h2 className="text-xl font-semibold text-gray-700">
+              Блоки "текст + картинка"
+            </h2>
+            {Array.from({ length: 3 }).map((_, index) => (
+              <TextImageBlock
                 key={index}
                 text={text}
                 indicatorValue={indicatorValue}
